@@ -5,7 +5,7 @@ namespace RemoveRepeatedCharachters
 {
     class Program
     {
-        private const string TextToParse = "aaabbbcccbb";
+        private const string textToParse = "aaabbbcccbb";
 
         private static readonly ForLoopTextParser forLoopTextParser = IOC.container.GetInstance<ForLoopTextParser>();
         private static readonly ParallelForLoopTextParser parallelForLoopTextParser = IOC.container.GetInstance<ParallelForLoopTextParser>();
@@ -14,13 +14,13 @@ namespace RemoveRepeatedCharachters
         static void Main(string[] args)
         {
             IOC.ConfigureIOC();
-            var forLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => forLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
-            var parallelForLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => parallelForLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
-            var recursiveRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => recursiveTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
+            var forLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => forLoopTextParser.RemoveRepeatedCharacters(textToParse), textToParse);
+            var parallelForLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => parallelForLoopTextParser.RemoveRepeatedCharacters(textToParse), textToParse);
+            var recursiveRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => recursiveTextParser.RemoveRepeatedCharacters(textToParse), textToParse);
 
-            Console.WriteLine($"ForLoop: Unparsed string {TextToParse} Result is {forLoopRemoveRepeatedCharacters.Item2} and took {forLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
-            Console.WriteLine($"ParallelForLoop: Unparsed string {TextToParse} Result is {parallelForLoopRemoveRepeatedCharacters.Item2} and took {parallelForLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
-            Console.WriteLine($"Recursive: Unparsed string {TextToParse} Result is {recursiveRemoveRepeatedCharacters.Item2} and took {recursiveRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
+            Console.WriteLine($"ForLoop: Unparsed string {textToParse} Result is {forLoopRemoveRepeatedCharacters.Item2} and took {forLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
+            Console.WriteLine($"ParallelForLoop: Unparsed string {textToParse} Result is {parallelForLoopRemoveRepeatedCharacters.Item2} and took {parallelForLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
+            Console.WriteLine($"Recursive: Unparsed string {textToParse} Result is {recursiveRemoveRepeatedCharacters.Item2} and took {recursiveRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
             Console.ReadLine();
         }
 
