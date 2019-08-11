@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace RemoveRepeatedCharachters
+namespace RemoveRepeatedCharachters.TextParsers
 {
     public class RecursiveTextParser : ITextParser
     {

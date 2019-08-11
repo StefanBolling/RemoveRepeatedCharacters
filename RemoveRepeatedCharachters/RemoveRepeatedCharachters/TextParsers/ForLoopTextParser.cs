@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 
-namespace RemoveRepeatedCharachters
+namespace RemoveRepeatedCharachters.TextParsers
 {
-    public class ParallelForLoopTextParser : ITextParser
+    public class ForLoopTextParser : ITextParser
     {
         public string RemoveRepeatedCharacters(string stringToParse)
         {
@@ -11,13 +10,13 @@ namespace RemoveRepeatedCharachters
             var parsedString = string.Empty;
             var arrayLength = textArray.Length;
 
-            Parallel.For(0, arrayLength, i =>
+            for (var i = 0; i < arrayLength; i++)
             {
                 if (i == 0)
                     parsedString += textArray[0];
                 else if (textArray[i] != textArray[i - 1])
                     parsedString += textArray[i];
-            });
+            }
 
             return parsedString;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RemoveRepeatedCharachters.TextParsers;
+using System;
 
 namespace RemoveRepeatedCharachters
 {
