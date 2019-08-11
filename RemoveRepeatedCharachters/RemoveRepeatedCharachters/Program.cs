@@ -7,16 +7,16 @@ namespace RemoveRepeatedCharachters
     {
         private const string TextToParse = "aaabbbcccbb";
 
-        // Todo: Implement IOC framework
-        private static readonly ForLoopTextParser _forLoopTextParser = new ForLoopTextParser();
-        private static readonly ParallelForLoopTextParser _parallelForLoopTextParser = new ParallelForLoopTextParser();
-        private static readonly RecursiveTextParser _recursiveTextParser = new RecursiveTextParser();
+        private static readonly ForLoopTextParser forLoopTextParser = IOC.container.GetInstance<ForLoopTextParser>();
+        private static readonly ParallelForLoopTextParser parallelForLoopTextParser = IOC.container.GetInstance<ParallelForLoopTextParser>();
+        private static readonly RecursiveTextParser recursiveTextParser = IOC.container.GetInstance<RecursiveTextParser>();
 
         static void Main(string[] args)
         {
-            var forLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => _forLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
-            var parallelForLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => _parallelForLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
-            var recursiveRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => _recursiveTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
+            IOC.ConfigureIOC();
+            var forLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => forLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
+            var parallelForLoopRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => parallelForLoopTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
+            var recursiveRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => recursiveTextParser.RemoveRepeatedCharacters(TextToParse), TextToParse);
 
             Console.WriteLine($"ForLoop: Unparsed string {TextToParse} Result is {forLoopRemoveRepeatedCharacters.Item2} and took {forLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
             Console.WriteLine($"ParallelForLoop: Unparsed string {TextToParse} Result is {parallelForLoopRemoveRepeatedCharacters.Item2} and took {parallelForLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");

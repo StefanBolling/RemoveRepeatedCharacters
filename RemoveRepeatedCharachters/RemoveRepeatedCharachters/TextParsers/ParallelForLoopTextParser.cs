@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using RemoveRepeatedCharachters.TextParsers.Interfaces;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RemoveRepeatedCharachters.TextParsers

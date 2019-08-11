@@ -1,4 +1,4 @@
-﻿namespace RemoveRepeatedCharachters.TextParsers
+﻿namespace RemoveRepeatedCharachters.TextParsers.Interfaces
 {
     public interface ITextParser
     {
