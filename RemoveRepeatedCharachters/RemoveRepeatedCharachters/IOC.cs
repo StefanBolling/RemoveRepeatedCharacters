@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RemoveRepeatedCharachters.TextParsers;
-using RemoveRepeatedCharachters.TextParsers.Interfaces;
 
 namespace RemoveRepeatedCharachters
 {
