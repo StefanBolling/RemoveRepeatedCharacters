@@ -1,20 +1,21 @@
-﻿using RemoveRepeatedCharachters.TextParsers;
-using SimpleInjector;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RemoveRepeatedCharachters.TextParsers;
+using RemoveRepeatedCharachters.TextParsers.Interfaces;
 
 namespace RemoveRepeatedCharachters
 {
     public static class IOC
     {
-        public static  Container container;
-
-        public static void ConfigureIOC()
+        public static ServiceProvider Initialize()
         {
-            container = new Container();
-            container.Register<ForLoopTextParser>();
-            container.Register<ParallelForLoopTextParser>();
-            container.Register<RecursiveTextParser>();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddScoped<ForLoopTextParser, ForLoopTextParser>();
+            serviceCollection.AddScoped<ParallelForLoopTextParser, ParallelForLoopTextParser>();
+            serviceCollection.AddScoped<RecursiveTextParser, RecursiveTextParser>();
 
-            container.Verify();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            return serviceProvider;
         }
     }
 }
