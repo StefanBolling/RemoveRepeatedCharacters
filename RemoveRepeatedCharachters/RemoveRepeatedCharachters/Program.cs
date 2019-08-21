@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RemoveRepeatedCharachters.TextParsers;
+using RemoveRepeatedCharachters.TextParsers.Models;
 using System;
 
 namespace RemoveRepeatedCharachters
@@ -8,18 +9,18 @@ namespace RemoveRepeatedCharachters
     {
         private const string textToParse = "aaabbbcccbb";
 
-        private static Tuple<TimeSpan, string> ForLoopRemoveRepeatedCharacters { get; set; }
-        private static Tuple<TimeSpan, string> ParallelForLoopRemoveRepeatedCharacters { get; set; }
-        private static Tuple<TimeSpan, string> RecursiveRemoveRepeatedCharacters { get; set; }
+        private static ParsedTextAndExcecutionTime ForLoopRemoveRepeatedCharacters;
+        private static ParsedTextAndExcecutionTime ParallelForLoopRemoveRepeatedCharacters;
+        private static ParsedTextAndExcecutionTime RecursiveRemoveRepeatedCharacters;
 
         static void Main(string[] args)
         {
             var serviceCollection = IOC.Initialize();
             ProcessText(serviceCollection);
 
-            Console.WriteLine($"ForLoop: Unparsed string {textToParse} Result is {ForLoopRemoveRepeatedCharacters.Item2} and took {ForLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
-            Console.WriteLine($"ParallelForLoop: Unparsed string {textToParse} Result is {ParallelForLoopRemoveRepeatedCharacters.Item2} and took {ParallelForLoopRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
-            Console.WriteLine($"Recursive: Unparsed string {textToParse} Result is {RecursiveRemoveRepeatedCharacters.Item2} and took {RecursiveRemoveRepeatedCharacters.Item1.Milliseconds} milliseconds");
+            Console.WriteLine($"ForLoop: Unparsed string {textToParse} Result is {ForLoopRemoveRepeatedCharacters.ParsedText} and took {ForLoopRemoveRepeatedCharacters.ExcecutionTime.Milliseconds} milliseconds");
+            Console.WriteLine($"ParallelForLoop: Unparsed string {textToParse} Result is {ParallelForLoopRemoveRepeatedCharacters.ParsedText} and took {ParallelForLoopRemoveRepeatedCharacters.ExcecutionTime.Milliseconds} milliseconds");
+            Console.WriteLine($"Recursive: Unparsed string {textToParse} Result is {RecursiveRemoveRepeatedCharacters.ParsedText} and took {RecursiveRemoveRepeatedCharacters.ExcecutionTime.Milliseconds} milliseconds");
             Console.ReadLine();
         }
 
@@ -30,14 +31,14 @@ namespace RemoveRepeatedCharachters
             RecursiveRemoveRepeatedCharacters = RemoveRepeatedCharacters(x => serviceCollection.GetService<RecursiveTextParser>().RemoveRepeatedCharacters(textToParse), textToParse);
         }
 
-        private static Tuple<TimeSpan, string> RemoveRepeatedCharacters(Func<string, string> removeDuplicatesMethod, string textToParse)
+        private static ParsedTextAndExcecutionTime RemoveRepeatedCharacters(Func<string, string> removeDuplicatesMethod, string textToParse)
         {
             var startTime = DateTime.Now;
-            var parsedString = removeDuplicatesMethod(textToParse);
+            var parsedText = removeDuplicatesMethod(textToParse);
             var endTime = DateTime.Now;
             var totalTime = endTime - startTime;
 
-            return new Tuple<TimeSpan, string>(totalTime, parsedString);
+            return new ParsedTextAndExcecutionTime() { ExcecutionTime = totalTime, ParsedText = parsedText };
         }
     }
 }
