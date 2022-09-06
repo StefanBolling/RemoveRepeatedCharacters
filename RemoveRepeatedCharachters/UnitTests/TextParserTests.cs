@@ -1,55 +1,54 @@
 using NUnit.Framework;
-using RemoveRepeatedCharachters.TextParsers;
+using RemoveRepeatedCharacters.TextParsers;
 
-namespace Tests
+namespace UnitTests;
+
+public class TextParserTests
 {
-    public class Tests
+    private const string TextToParse = "aaabbbcccbb";
+    private const string ExpectedResult = "abcb";
+
+    [SetUp]
+    public void Setup()
     {
-        private const string textToParse = "aaabbbcccbb";
-        private const string expectedResult = "abcb";
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-        }
+    [Test]
+    public void ForLoopTextParserShouldParseStringCorrectly()
+    {
+        // Arrange
+        var textParser = new ForLoopTextParser();
 
-        [Test]
-        public void ForLoopTextParserShouldParseStringCorrectly()
-        {
-            // Arrange
-            var textParser = new ForLoopTextParser();
+        // Act
+        var parsedText = textParser.RemoveRepeatedCharacters(TextToParse);
 
-            // Act
-            var parsedText = textParser.RemoveRepeatedCharacters(textToParse);
+        // Assert
+        Assert.AreEqual(ExpectedResult, parsedText);
+    }
 
-            // Assert
-            Assert.AreEqual(expectedResult, parsedText);
-        }
+    [Test]
+    public void ParallelForLoopTextParserShouldParseStringCorrectly()
+    {
+        // Arrange
+        var textParser = new ParallelForLoopTextParser();
 
-        [Test]
-        public void ParallelForLoopTextParserShouldParseStringCorrectly()
-        {
-            // Arrange
-            var textParser = new ParallelForLoopTextParser();
+        // Act
+        var parsedText = textParser.RemoveRepeatedCharacters(TextToParse);
 
-            // Act
-            var parsedText = textParser.RemoveRepeatedCharacters(textToParse);
+        // Assert
+        Assert.AreEqual(ExpectedResult, parsedText);
+    }
 
-            // Assert
-            Assert.AreEqual(expectedResult, parsedText);
-        }
+    [Test]
+    public void RecursiveTextParserShouldParseStringCorrectly()
+    {
+        // Arrange
+        var textParser = new ParallelForLoopTextParser();
 
-        [Test]
-        public void RecursiveTextParserShouldParseStringCorrectly()
-        {
-            // Arrange
-            var textParser = new ParallelForLoopTextParser();
+        // Act
+        var parsedText = textParser.RemoveRepeatedCharacters(TextToParse);
 
-            // Act
-            var parsedText = textParser.RemoveRepeatedCharacters(textToParse);
-
-            // Assert
-            Assert.AreEqual(expectedResult, parsedText);
-        }
+        // Assert
+        Assert.AreEqual(ExpectedResult, parsedText);
     }
 }

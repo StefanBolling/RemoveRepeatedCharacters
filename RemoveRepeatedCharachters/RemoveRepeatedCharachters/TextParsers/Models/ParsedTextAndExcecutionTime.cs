@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace RemoveRepeatedCharachters.TextParsers.Models
-{
-    public class ParsedTextAndExcecutionTime
-    {
-        public TimeSpan ExcecutionTime { get; set; }
+namespace RemoveRepeatedCharacters.TextParsers.Models;
 
-        public string ParsedText { get; set; }
-    }
+public class ParsedTextAndExecutionTime
+{
+    public TimeSpan ExecutionTime { get; set; }
+
+    public string ParsedText { get; set; }
 }

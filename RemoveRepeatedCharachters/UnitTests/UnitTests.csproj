@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RemoveRepeatedCharachters\RemoveRepeatedCharachters.csproj" />
+    <ProjectReference Include="..\RemoveRepeatedCharachters\RemoveRepeatedCharacters.csproj" />
   </ItemGroup>
 
 </Project>

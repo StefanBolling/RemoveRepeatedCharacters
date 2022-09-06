@@ -1,7 +1,6 @@
-﻿namespace RemoveRepeatedCharachters.TextParsers.Interfaces
+﻿namespace RemoveRepeatedCharacters.TextParsers.Interfaces;
+
+public interface ITextParser
 {
-    public interface ITextParser
-    {
-        string RemoveRepeatedCharacters(string stringToParse);
-    }
+    string RemoveRepeatedCharacters(string stringToParse);
 }

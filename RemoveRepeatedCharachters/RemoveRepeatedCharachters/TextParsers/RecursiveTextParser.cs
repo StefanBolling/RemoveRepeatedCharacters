@@ -1,31 +1,30 @@
-﻿using RemoveRepeatedCharachters.TextParsers.Interfaces;
-using System.Linq;
+﻿using System.Linq;
+using RemoveRepeatedCharacters.TextParsers.Interfaces;
 
-namespace RemoveRepeatedCharachters.TextParsers
+namespace RemoveRepeatedCharacters.TextParsers;
+
+public class RecursiveTextParser : ITextParser
 {
-    public class RecursiveTextParser : ITextParser
+    private string parsedText;
+
+    public string RemoveRepeatedCharacters(string stringToParse)
     {
-        private string parsedText;
+        RemoveRepeatedCharactersInArray(stringToParse.ToArray());
 
-        public string RemoveRepeatedCharacters(string stringToParse)
+        return parsedText;
+    }
+
+    private void RemoveRepeatedCharactersInArray(char[] textArray)
+    {
+        if (textArray.Length == 1)
         {
-            RemoveRepeatedCharactersInArray(stringToParse.ToArray());
-
-            return parsedText;
-        }
-
-        private void RemoveRepeatedCharactersInArray(char[] textArray)
-        {
-            if (textArray.Length == 1)
-            {
-                if (parsedText.ToArray()[parsedText.Length - 1] != textArray[0])
-                    parsedText += textArray[0];
-                return;
-            }
-            else if (textArray[1] != textArray[0])
+            if (parsedText.ToArray()[parsedText.Length - 1] != textArray[0])
                 parsedText += textArray[0];
-
-            RemoveRepeatedCharactersInArray(textArray.Skip(1).ToArray());
+            return;
         }
+        else if (textArray[1] != textArray[0])
+            parsedText += textArray[0];
+
+        RemoveRepeatedCharactersInArray(textArray.Skip(1).ToArray());
     }
 }

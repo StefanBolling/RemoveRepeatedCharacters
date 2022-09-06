@@ -1,20 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RemoveRepeatedCharachters.TextParsers;
+using RemoveRepeatedCharacters.TextParsers;
 
-namespace RemoveRepeatedCharachters
+namespace RemoveRepeatedCharacters;
+
+public static class IOC
 {
-    public static class IOC
+    public static ServiceProvider Initialize()
     {
-        public static ServiceProvider Initialize()
-        {
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddScoped<ForLoopTextParser, ForLoopTextParser>();
-            serviceCollection.AddScoped<ParallelForLoopTextParser, ParallelForLoopTextParser>();
-            serviceCollection.AddScoped<RecursiveTextParser, RecursiveTextParser>();
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddScoped<ForLoopTextParser, ForLoopTextParser>();
+        serviceCollection.AddScoped<ParallelForLoopTextParser, ParallelForLoopTextParser>();
+        serviceCollection.AddScoped<RecursiveTextParser, RecursiveTextParser>();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+        var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            return serviceProvider;
-        }
+        return serviceProvider;
     }
 }
