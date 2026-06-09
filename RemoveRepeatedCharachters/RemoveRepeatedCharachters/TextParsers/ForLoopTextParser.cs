@@ -1,24 +1,25 @@
-﻿using System.Linq;
+using System.Text;
 using RemoveRepeatedCharacters.TextParsers.Interfaces;
 
 namespace RemoveRepeatedCharacters.TextParsers;
 
 public class ForLoopTextParser : ITextParser
 {
+    public string Name => "ForLoop";
+
     public string RemoveRepeatedCharacters(string stringToParse)
     {
-        var textArray = stringToParse.ToArray();
-        var parsedString = string.Empty;
-        var arrayLength = textArray.Length;
+        if (string.IsNullOrEmpty(stringToParse))
+            return stringToParse;
 
-        for (var i = 0; i < arrayLength; i++)
+        var parsedString = new StringBuilder(stringToParse.Length);
+
+        for (var i = 0; i < stringToParse.Length; i++)
         {
-            if (i == 0)
-                parsedString += textArray[0];
-            else if (textArray[i] != textArray[i - 1])
-                parsedString += textArray[i];
+            if (i == 0 || stringToParse[i] != stringToParse[i - 1])
+                parsedString.Append(stringToParse[i]);
         }
 
-        return parsedString;
+        return parsedString.ToString();
     }
 }

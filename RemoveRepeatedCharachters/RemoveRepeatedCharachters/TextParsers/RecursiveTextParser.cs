@@ -1,30 +1,31 @@
-﻿using System.Linq;
+using System.Text;
 using RemoveRepeatedCharacters.TextParsers.Interfaces;
 
 namespace RemoveRepeatedCharacters.TextParsers;
 
 public class RecursiveTextParser : ITextParser
 {
-    private string parsedText;
+    public string Name => "Recursive";
 
     public string RemoveRepeatedCharacters(string stringToParse)
     {
-        RemoveRepeatedCharactersInArray(stringToParse.ToArray());
+        if (string.IsNullOrEmpty(stringToParse))
+            return stringToParse;
 
-        return parsedText;
+        var parsedString = new StringBuilder(stringToParse.Length);
+        Append(stringToParse, 0, parsedString);
+
+        return parsedString.ToString();
     }
 
-    private void RemoveRepeatedCharactersInArray(char[] textArray)
+    private static void Append(string source, int index, StringBuilder parsedString)
     {
-        if (textArray.Length == 1)
-        {
-            if (parsedText.ToArray()[parsedText.Length - 1] != textArray[0])
-                parsedText += textArray[0];
+        if (index >= source.Length)
             return;
-        }
-        else if (textArray[1] != textArray[0])
-            parsedText += textArray[0];
 
-        RemoveRepeatedCharactersInArray(textArray.Skip(1).ToArray());
+        if (index == 0 || source[index] != source[index - 1])
+            parsedString.Append(source[index]);
+
+        Append(source, index + 1, parsedString);
     }
 }
